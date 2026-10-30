@@ -48,13 +48,22 @@ jobs:
 
         echo "# CONFIG_PACKAGE_attendedsysupgrade-common is not set" >> .config
         echo "# CONFIG_PACKAGE_luci-app-attendedsysupgrade is not set" >> .config
+        # Меняем dnsmasq на dnsmasq-full
+        # Полностью удаляем упоминания обычной версии из конфига
+        sed -i '/CONFIG_PACKAGE_dnsmasq=y/d' .config
+        sed -i '/CONFIG_PACKAGE_dnsmasq is not set/d' .config
+
+        # Принудительно отключаем обычный и включаем full
+        echo "# CONFIG_PACKAGE_dnsmasq is not set" >> .config
+        echo "CONFIG_PACKAGE_dnsmasq-full=y" >> .config
+
         # Меняем таргет под новый DTS монолит
         sed -i '/CONFIG_TARGET_ramips_mt76x8_DEVICE_/d' .config
         echo "CONFIG_TARGET_ramips=y" >> .config
         echo "CONFIG_TARGET_ramips_mt76x8=y" >> .config
         echo "CONFIG_TARGET_ramips_mt76x8_DEVICE_zyxel_keenetic-4g-iii-b-ubootmod=y" >> .config
         echo "CONFIG_BPF_TOOLCHAIN_NONE=y" >> .config
-        make oldconfig
+        make defconfig
 
     - name: Compile Firmware
       run: |

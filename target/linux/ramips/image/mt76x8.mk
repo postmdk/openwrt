@@ -842,7 +842,7 @@ define Device/tplink_archer-c20-v4-usb-16m
   TPLINK_HWREVADD := 0x4
   DEVICE_PACKAGES := kmod-mt76x0e kmod-usb-core kmod-usb2 kmod-usb-ohci
   IMAGES := sysupgrade.bin
-  SUPPORTED_DEVICES := tplink,archer-c20-v4
+  SUPPORTED_DEVICES := tplink,archer-c20-v4-usb-16m
 endef
 TARGET_DEVICES += tplink_archer-c20-v4-usb-16m
 

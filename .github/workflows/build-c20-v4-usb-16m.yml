@@ -51,17 +51,23 @@ jobs:
 
         echo "# CONFIG_PACKAGE_attendedsysupgrade-common is not set" >> .config
         echo "# CONFIG_PACKAGE_luci-app-attendedsysupgrade is not set" >> .config
+        # 2. Меняем dnsmasq на dnsmasq-full
+        # Полностью удаляем упоминания обычной версии из конфига
+        sed -i '/CONFIG_PACKAGE_dnsmasq=y/d' .config
+        sed -i '/CONFIG_PACKAGE_dnsmasq is not set/d' .config
 
-        # 2. Меняем таргет под новый DTS монолит
+        # Принудительно отключаем обычный и включаем full
+        echo "# CONFIG_PACKAGE_dnsmasq is not set" >> .config
+        echo "CONFIG_PACKAGE_dnsmasq-full=y" >> .config
+
+        # 3. Меняем таргет под новый DTS монолит
         sed -i '/CONFIG_TARGET_ramips_mt76x8_DEVICE_/d' .config
         echo "CONFIG_TARGET_ramips=y" >> .config
         echo "CONFIG_TARGET_ramips_mt76x8=y" >> .config
         echo "CONFIG_TARGET_ramips_mt76x8_DEVICE_tplink_archer-c20-v4-usb-16m=y" >> .config
         echo "CONFIG_BPF_TOOLCHAIN_NONE=y" >> .config
 
-        # 3. Используем oldconfig вместо defconfig. 
-        # oldconfig уважает наши `# is not set` и не сбрасывает их обратно в `=y`.
-        make oldconfig
+        make defconfig
 
     - name: Compile Firmware
       run: |

@@ -3,7 +3,7 @@
 #include "mt7628an_tplink_8m.dtsi"
 
 / {
-	compatible = "tplink,archer-c20-v4", "mediatek,mt7628an-soc";
+	compatible = "tplink,archer-c20-v4-usb-16m", "mediatek,mt7628an-soc";
 	model = "TP-Link Archer C20 v4 (USB 16M Mod)";
 
 	aliases {
