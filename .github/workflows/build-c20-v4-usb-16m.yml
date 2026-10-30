@@ -1,9 +1,9 @@
 name: Build and Release OpenWrt for TP-Link Archer C20 V4 USB 16m (v25.12.6)
 
 on:
-  push:
-    branches:
-      - 25.12.6-mod
+#  push:
+#    branches:
+#      - 25.12.6-mod
   workflow_dispatch:
 permissions:
   contents: write

@@ -63,7 +63,7 @@ jobs:
         echo "CONFIG_TARGET_ramips_mt76x8=y" >> .config
         echo "CONFIG_TARGET_ramips_mt76x8_DEVICE_zyxel_keenetic-4g-iii-b-ubootmod=y" >> .config
         echo "CONFIG_BPF_TOOLCHAIN_NONE=y" >> .config
-        make defconfig
+        make oldconfig
 
     - name: Compile Firmware
       run: |
